@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zxx">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+        <!-- Icon Plugins CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/iconplugins.css') }}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+        <!-- Theme Dark CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-dark.css') }}">
+ 
+        <title>500 - Server Error</title>
+
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logos/logo-2.png') }}">
+    </head>
+    <body>
+        <!-- Error Area -->
+        <div class="error-area ptb-100">
+            <div class="container">
+                <div class="error-content">
+                    <h1>5<span>0</span>0</h1>
+                    <h3>Internal Server Error</h3>
+                    <p>Something went wrong on our servers. We are working to fix the problem. Please try again later.</p>
+                    <a href="{{ url_for('home') }}" class="default-btn border-radius-50">Back to Homepage</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Error Area -->
+
+        <!-- Jquery Min JS -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <!-- Bootstrap Bundle Min JS -->
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Custom JS -->
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    </body>
+</html> 

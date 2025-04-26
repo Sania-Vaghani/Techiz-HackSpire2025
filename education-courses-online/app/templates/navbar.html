@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('main.index') }}">
+            <span class="fw-bold text-primary">EduCourses</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <form class="d-flex mx-auto search-form" action="{{ url_for('courses.search') }}" method="GET">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search courses..." name="q" 
+                           aria-label="Search courses">
+                    <button class="btn btn-outline-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" 
+                       href="{{ url_for('main.index') }}">Home</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Courses
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="coursesDropdown">
+                        <li>
+                            <a class="dropdown-item {% if request.endpoint == 'courses.index' %}active{% endif %}" 
+                               href="{{ url_for('courses.index') }}">All Courses</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if request.endpoint == 'courses.categories' %}active{% endif %}" 
+                               href="{{ url_for('courses.categories') }}">Categories</a>
+                        </li>
+                        {% if current_user.is_authenticated %}
+                        <li>
+                            <a class="dropdown-item {% if request.endpoint == 'courses.create' %}active{% endif %}" 
+                               href="{{ url_for('courses.create') }}">Create Course</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}" 
+                       href="{{ url_for('main.contact') }}">Contact</a>
+                </li>
+            </ul>
+
+            <div class="ms-auto d-flex align-items-center">
+                {% if current_user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link dropdown-toggle" type="button" id="userDropdown" 
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i>
+                            {{ current_user.username }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ url_for('auth.profile') }}">
+                                    <i class="fas fa-user me-2"></i>My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url_for('courses.my_courses') }}">
+                                    <i class="fas fa-book-reader me-2"></i>My Courses
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary me-2">Sign In</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav> 

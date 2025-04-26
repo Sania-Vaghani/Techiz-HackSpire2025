@@ -1,0 +1,198 @@
+/* Custom Theme CSS */
+:root {
+    --primary-gradient: linear-gradient(to right, #00bf8f, #0099ff);
+    --secondary-color: #6c5ce7;
+    --text-color: #2d3436;
+    --light-bg: #f5f6fa;
+    --white: #ffffff;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* Body and General Styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--light-bg);
+}
+
+/* Navbar Styling */
+.navbar-area {
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.nav-area {
+    padding: 15px 0;
+}
+
+.logo-one, .logo-two {
+    height: 40px;
+    width: auto;
+}
+
+/* Card Styling */
+.course-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: none;
+    overflow: hidden;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Styling */
+.default-btn {
+    background: var(--primary-gradient);
+    color: var(--white);
+    border-radius: 25px;
+    padding: 12px 25px;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.default-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.default-btn.two {
+    background: var(--secondary-color);
+}
+
+/* Chat-like Message Boxes */
+.message-box {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: var(--shadow);
+}
+
+.message-box.user {
+    background: var(--primary-gradient);
+    color: var(--white);
+    margin-left: 20%;
+}
+
+.message-box.assistant {
+    background: var(--light-bg);
+    margin-right: 20%;
+}
+
+/* Search Form */
+.search-form {
+    position: relative;
+    max-width: 400px;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 25px;
+    background: var(--light-bg);
+}
+
+.search-form button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-color);
+}
+
+/* Footer Styling */
+.footer-area {
+    background: var(--white);
+    padding: 60px 0 0;
+    margin-top: 60px;
+}
+
+.footer-widget h3 {
+    color: var(--text-color);
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.footer-list li a {
+    color: var(--text-color);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.footer-list li a:hover {
+    color: var(--secondary-color);
+    padding-left: 5px;
+}
+
+/* Alert Messages */
+.alert {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--shadow);
+}
+
+/* Form Controls */
+.form-control {
+    border-radius: var(--border-radius);
+    padding: 12px 20px;
+    border: 1px solid #e1e1e1;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    border-color: var(--secondary-color);
+}
+
+/* Course Grid */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 30px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .message-box.user,
+    .message-box.assistant {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #f5f6fa;
+        --light-bg: #2d3436;
+        --white: #1e272e;
+    }
+    
+    .form-control,
+    .search-form input {
+        background: #2d3436;
+        border-color: #4a4a4a;
+        color: var(--text-color);
+    }
+    
+    .search-form button {
+        color: var(--text-color);
+    }
+} 

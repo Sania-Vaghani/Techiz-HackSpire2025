@@ -1,0 +1,18 @@
+/*===============  Bootstrap CSS   =================*/
+@import url(../css/bootstrap.min.css);
+
+/*===============  Mean menu CSS   =================*/
+@import url(../css/meanmenu.min.css);
+
+/*===============  Magnific Popup CSS   =================*/
+@import url(../css/magnific-popup.min.css);
+
+/*===============  Owl Carousel CSS   =================*/
+@import url(../css/owl.carousel.min.css);
+@import url(../css/owl.theme.default.min.css);
+
+/*===============  Odometer CSS   =================*/
+@import url(../css/odometer.min.css);
+
+/*===============  AOS CSS   =================*/
+@import url(../css/aos.css);

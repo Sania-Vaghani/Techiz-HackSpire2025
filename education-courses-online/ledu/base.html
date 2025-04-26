@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zxx">
+    <head>
+        <!-- Required Meta Tags -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+        <!-- Icon Plugins CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/iconplugins.css') }}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+        <!-- Theme Dark CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-dark.css') }}">
+ 
+        <title>{% block title %}Education Courses{% endblock %}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logos/logo-2.png') }}">
+        
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <!-- Pre Loader -->
+        <div id="preloader">
+            <div id="preloader-area">
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+            </div>
+            <div class="preloader-section preloader-left"></div>
+            <div class="preloader-section preloader-right"></div>
+        </div>
+        <!-- End Pre Loader -->
+
+        <!-- Start Navbar Area -->
+        <div class="navbar-area">
+            <div class="mobile-responsive-nav">
+                <div class="container">
+                    <div class="mobile-responsive-menu">
+                        <div class="logo">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='images/logos/logo-2.png') }}" class="logo-one" alt="logo">
+                                <img src="{{ url_for('static', filename='images/logos/logo-2.png') }}" class="logo-two" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu For Desktop Device -->
+            <div class="desktop-nav nav-area">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <a class="navbar-brand" href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='images/logos/logo-2.png') }}" class="logo-one" alt="Logo">
+                            <img src="{{ url_for('static', filename='images/logos/logo-2.png') }}" class="logo-two" alt="Logo">
+                        </a>
+
+                        <div class="nav-widget-form">
+                            <form class="search-form search-form-bg">
+                                <input type="search" class="form-control" placeholder="Search courses">
+                                <button type="submit">
+                                    <i class="ri-search-line"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link dropdown-toggle">Courses</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('courses') }}" class="nav-link {% if request.endpoint == 'courses' %}active{% endif %}">Courses</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('courses_list') }}" class="nav-link {% if request.endpoint == 'courses_list' %}active{% endif %}">Courses List</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ url_for('courses_details') }}" class="nav-link {% if request.endpoint == 'courses_details' %}active{% endif %}">Courses Details</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}">Contact Us</a>
+                                </li>
+                            </ul>
+
+                            <div class="others-options d-flex align-items-center">
+                                {% if not session.get('user_id') %}
+                                    <div class="optional-item">
+                                        <a href="{{ url_for('signin') }}" class="default-btn border-radius-50">Sign In</a>
+                                    </div>
+                                    <div class="optional-item">
+                                        <a href="{{ url_for('signup') }}" class="default-btn two border-radius-50">Sign Up</a>
+                                    </div>
+                                {% else %}
+                                    <div class="optional-item">
+                                        <a href="{{ url_for('profile') }}" class="default-btn border-radius-50">My Profile</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar Area -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+        <!-- Footer Area -->
+        <footer class="footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="{{ url_for('home') }}">
+                                    <img src="{{ url_for('static', filename='images/logos/logo-2.png') }}" alt="logo">
+                                </a>
+                            </div>
+                            <p>Education Courses - Your Gateway to Knowledge</p>
+                            <ul class="social-link">
+                                <li><a href="#" target="_blank"><i class="ri-facebook-fill"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="ri-twitter-fill"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="ri-instagram-fill"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-widget ps-5">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-list">
+                                <li><a href="{{ url_for('home') }}">Home</a></li>
+                                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                                <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="footer-widget ps-5">
+                            <h3>Resources</h3>
+                            <ul class="footer-list">
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                                <li><a href="#">Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-widget ps-5">
+                            <h3>Contact Info</h3>
+                            <ul class="footer-contact-list">
+                                <li>
+                                    <i class="ri-map-pin-line"></i>
+                                    <div class="content">
+                                        <p>123 Education Street, Learning City</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="ri-mail-line"></i>
+                                    <div class="content">
+                                        <p><a href="mailto:hello@educourses.com">hello@educourses.com</a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="ri-phone-line"></i>
+                                    <div class="content">
+                                        <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright-area">
+                <div class="container">
+                    <div class="copy-right-text text-center">
+                        <p>
+                            Copyright © {{ now.year }} Education Courses. All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer Area -->
+
+        <!-- Go Top -->
+        <div class="go-top">
+            <i class="ri-arrow-up-s-fill"></i>
+            <i class="ri-arrow-up-s-fill"></i>
+        </div>
+        <!-- End Go Top -->
+
+        <!-- Jquery Min JS -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <!-- Bootstrap Bundle Min JS -->
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Meanmenu Min JS -->
+        <script src="{{ url_for('static', filename='js/meanmenu.min.js') }}"></script>
+        <!-- Owl Carousel Min JS -->
+        <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+        <!-- Wow Min JS -->
+        <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+        <!-- Appear Min JS -->
+        <script src="{{ url_for('static', filename='js/appear.min.js') }}"></script>
+        <!-- Odometer Min JS -->
+        <script src="{{ url_for('static', filename='js/odometer.min.js') }}"></script>
+        <!-- Form Validator Min JS -->
+        <script src="{{ url_for('static', filename='js/form-validator.min.js') }}"></script>
+        <!-- Contact JS -->
+        <script src="{{ url_for('static', filename='js/contact-form-script.js') }}"></script>
+        <!-- Ajaxchimp Min JS -->
+        <script src="{{ url_for('static', filename='js/ajaxchimp.min.js') }}"></script>
+        <!-- Custom JS -->
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+        
+        {% block extra_js %}{% endblock %}
+    </body>
+</html> 

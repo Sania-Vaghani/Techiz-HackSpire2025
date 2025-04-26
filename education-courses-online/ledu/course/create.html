@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Create Course - Education Courses{% endblock %}
+
+{% block content %}
+<div class="inner-banner">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Create New Course</h3>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li>Create Course</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="user-area pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="user-form">
+                    <div class="contact-form">
+                        <h3 class="text-center">Create a New Course</h3>
+                        <form method="POST" action="{{ url_for('create_course') }}" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.title.label(class="form-label") }}
+                                        {{ form.title(class="form-control" + (" is-invalid" if form.title.errors else ""), placeholder="Enter course title") }}
+                                        {% for error in form.title.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.description.label(class="form-label") }}
+                                        {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), rows="6", placeholder="Enter course description") }}
+                                        {% for error in form.description.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.price.label(class="form-label") }}
+                                        {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else ""), placeholder="Enter course price") }}
+                                        {% for error in form.price.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.duration.label(class="form-label") }}
+                                        {{ form.duration(class="form-control" + (" is-invalid" if form.duration.errors else ""), placeholder="e.g., 6 weeks") }}
+                                        {% for error in form.duration.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.level.label(class="form-label") }}
+                                        {{ form.level(class="form-select" + (" is-invalid" if form.level.errors else "")) }}
+                                        {% for error in form.level.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.category_id.label(class="form-label") }}
+                                        {{ form.category_id(class="form-select" + (" is-invalid" if form.category_id.errors else "")) }}
+                                        {% for error in form.category_id.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.image.label(class="form-label") }}
+                                        {{ form.image(class="form-control" + (" is-invalid" if form.image.errors else "")) }}
+                                        {% for error in form.image.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                        <small class="form-text text-muted">Upload a course thumbnail image (recommended size: 800x600px)</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 text-center">
+                                    <button type="submit" class="default-btn">Create Course</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

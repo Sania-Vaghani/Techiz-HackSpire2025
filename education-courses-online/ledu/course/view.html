@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }} - Education Courses{% endblock %}
+
+{% block content %}
+<div class="inner-banner">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>{{ course.title }}</h3>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li>{{ course.title }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="courses-details-area pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="courses-details-content">
+                    {% if course.image_url %}
+                        <div class="courses-details-img">
+                            <img src="{{ course.image_url }}" alt="{{ course.title }}">
+                        </div>
+                    {% endif %}
+
+                    <div class="description mt-30">
+                        <h3>Course Description</h3>
+                        <p>{{ course.description }}</p>
+                    </div>
+
+                    <div class="curriculum mt-30">
+                        <h3>Course Curriculum</h3>
+                        {% if course.lessons %}
+                            <div class="accordion" id="lessonAccordion">
+                                {% for lesson in course.lessons %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ lesson.id }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ lesson.id }}">
+                                                {{ lesson.title }}
+                                                <span class="duration">{{ lesson.duration }} min</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ lesson.id }}" class="accordion-collapse collapse" data-bs-parent="#lessonAccordion">
+                                            <div class="accordion-body">
+                                                <p>{{ lesson.content[:200] }}{% if lesson.content|length > 200 %}...{% endif %}</p>
+                                                {% if current_user.is_authenticated and current_user.is_enrolled(course) %}
+                                                    <a href="{{ url_for('lesson', course_id=course.id, lesson_id=lesson.id) }}" class="default-btn">Start Lesson</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>No lessons available yet.</p>
+                        {% endif %}
+
+                        {% if current_user.is_authenticated and course.instructor_id == current_user.id %}
+                            <div class="text-center mt-4">
+                                <a href="{{ url_for('create_lesson', course_id=course.id) }}" class="default-btn">Add New Lesson</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="reviews mt-30">
+                        <h3>Student Reviews</h3>
+                        {% if course.reviews %}
+                            <div class="reviews-list">
+                                {% for review in course.reviews %}
+                                    <div class="review-item">
+                                        <div class="review-head">
+                                            <h4>{{ review.user.username }}</h4>
+                                            <div class="rating">
+                                                {% for i in range(5) %}
+                                                    <i class="ri-star-{% if i < review.rating %}fill{% else %}line{% endif %}"></i>
+                                                {% endfor %}
+                                            </div>
+                                            <span class="date">{{ review.created_at.strftime('%B %d, %Y') }}</span>
+                                        </div>
+                                        <p>{{ review.comment }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>No reviews yet.</p>
+                        {% endif %}
+
+                        {% if current_user.is_authenticated and current_user.is_enrolled(course) %}
+                            <div class="write-review mt-4">
+                                <h4>Write a Review</h4>
+                                <form method="POST" action="{{ url_for('review_course', course_id=course.id) }}">
+                                    {{ review_form.hidden_tag() }}
+                                    <div class="form-group">
+                                        {{ review_form.rating.label(class="form-label") }}
+                                        {{ review_form.rating(class="form-select" + (" is-invalid" if review_form.rating.errors else "")) }}
+                                        {% for error in review_form.rating.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ review_form.comment.label(class="form-label") }}
+                                        {{ review_form.comment(class="form-control" + (" is-invalid" if review_form.comment.errors else ""), rows="4") }}
+                                        {% for error in review_form.comment.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <button type="submit" class="default-btn">Submit Review</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="courses-details-sidebar">
+                    <div class="courses-details-info">
+                        <div class="price">
+                            <h3>${{ "%.2f"|format(course.price) }}</h3>
+                        </div>
+                        <ul class="info-list">
+                            <li>
+                                <i class="ri-time-line"></i>
+                                Duration: {{ course.duration }}
+                            </li>
+                            <li>
+                                <i class="ri-bar-chart-line"></i>
+                                Level: {{ course.level|title }}
+                            </li>
+                            <li>
+                                <i class="ri-folder-line"></i>
+                                Category: <a href="{{ url_for('category', category_id=course.category.id) }}">{{ course.category.name }}</a>
+                            </li>
+                            <li>
+                                <i class="ri-user-line"></i>
+                                Instructor: {{ course.instructor.username }}
+                            </li>
+                            <li>
+                                <i class="ri-group-line"></i>
+                                Enrolled Students: {{ course.enrollments|length }}
+                            </li>
+                        </ul>
+
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.is_enrolled(course) %}
+                                <a href="#" class="default-btn w-100 disabled">Already Enrolled</a>
+                            {% else %}
+                                <form method="POST" action="{{ url_for('enroll', course_id=course.id) }}">
+                                    <button type="submit" class="default-btn w-100">Enroll Now</button>
+                                </form>
+                            {% endif %}
+                            {% if current_user.id == course.instructor_id %}
+                                <a href="{{ url_for('edit_course', course_id=course.id) }}" class="default-btn w-100 mt-3">Edit Course</a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ url_for('login') }}" class="default-btn w-100">Login to Enroll</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

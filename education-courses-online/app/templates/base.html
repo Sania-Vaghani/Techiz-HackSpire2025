@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+        <!-- Icon Plugins CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/iconplugins.css') }}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- Custom Theme CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/custom-theme.css') }}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+        <!-- Theme Dark CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-dark.css') }}">
+
+        <title>{% block title %}Education Courses Online{% endblock %}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logos/logo-2.png') }}">
+        
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        
+        <!-- Custom CSS -->
+        <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+        
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <!-- Pre Loader -->
+        <div id="preloader">
+            <div id="preloader-area">
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+            </div>
+            <div class="preloader-section preloader-left"></div>
+            <div class="preloader-section preloader-right"></div>
+        </div>
+        <!-- End Pre Loader -->
+
+        {% include 'navbar.html' %}
+        
+        <main class="container py-4">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer class="bg-light py-4 mt-auto">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 Education Courses Online. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#" class="text-decoration-none me-3">Privacy Policy</a>
+                        <a href="#" class="text-decoration-none me-3">Terms of Service</a>
+                        <a href="#" class="text-decoration-none">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- Jquery Min JS -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <!-- Bootstrap Bundle Min JS -->
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Meanmenu Min JS -->
+        <script src="{{ url_for('static', filename='js/meanmenu.min.js') }}"></script>
+        <!-- Owl Carousel Min JS -->
+        <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+        <!-- Wow Min JS -->
+        <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+        <!-- Appear Min JS -->
+        <script src="{{ url_for('static', filename='js/appear.min.js') }}"></script>
+        <!-- Odometer Min JS -->
+        <script src="{{ url_for('static', filename='js/odometer.min.js') }}"></script>
+        <!-- Form Validator Min JS -->
+        <script src="{{ url_for('static', filename='js/form-validator.min.js') }}"></script>
+        <!-- Contact JS -->
+        <script src="{{ url_for('static', filename='js/contact-form-script.js') }}"></script>
+        <!-- Ajaxchimp Min JS -->
+        <script src="{{ url_for('static', filename='js/ajaxchimp.min.js') }}"></script>
+        <!-- Custom JS -->
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+        
+        {% block extra_js %}{% endblock %}
+    </body>
+</html> 
