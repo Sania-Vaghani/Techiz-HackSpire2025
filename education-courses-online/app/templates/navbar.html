@@ -1,7 +1,95 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<!-- Add custom styles for the navbar -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    .student-navbar {
+        background: #00A3FF;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .student-navbar .navbar-brand {
+        color: #ffffff !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+    }
+
+    .student-navbar .nav-link {
+        color: #ffffff !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+    }
+
+    .student-navbar .nav-link:hover,
+    .student-navbar .nav-link.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff !important;
+    }
+
+    .student-navbar .search-form .form-control {
+        background: #E8F4F9;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .student-navbar .search-form .btn {
+        background: #00A3FF;
+        color: #ffffff;
+    }
+
+    .student-navbar .search-form .btn:hover {
+        background: #0096eb;
+        color: #ffffff;
+    }
+
+    .student-navbar .btn-auth {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+    }
+
+    .student-navbar .btn-signin {
+        background: transparent;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .student-navbar .btn-signin:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .student-navbar .btn-signup {
+        background: #ffffff;
+        color: #00A3FF;
+    }
+
+    .student-navbar .btn-signup:hover {
+        background: #f8f9fa;
+        color: #0096eb;
+    }
+
+    .student-navbar .dropdown-menu {
+        background: #ffffff;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .student-navbar .dropdown-item {
+        color: #1E1656;
+        font-weight: 400;
+    }
+
+    .student-navbar .dropdown-item:hover {
+        background: rgba(0, 163, 255, 0.1);
+        color: #00A3FF;
+    }
+
+    .student-navbar .dropdown-item.active {
+        background: #00A3FF;
+        color: #ffffff;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg student-navbar">
     <div class="container">
         <a class="navbar-brand" href="{{ url_for('main.index') }}">
-            <span class="fw-bold text-primary">EduCourses</span>
+            <i class="fas fa-graduation-cap me-2"></i>EduCourses
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
@@ -12,9 +100,9 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <form class="d-flex mx-auto search-form" action="{{ url_for('courses.search') }}" method="GET">
                 <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search courses..." name="q" 
+                    <input type="search" class="form-control" placeholder="What do you want to learn?" name="q" 
                            aria-label="Search courses">
-                    <button class="btn btn-outline-primary" type="submit">
+                    <button class="btn" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -23,27 +111,35 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" 
-                       href="{{ url_for('main.index') }}">Home</a>
+                       href="{{ url_for('main.index') }}">
+                       <i class="fas fa-home me-1"></i>Home
+                    </a>
                 </li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" 
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Courses
+                       <i class="fas fa-book me-1"></i>Courses
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="coursesDropdown">
                         <li>
                             <a class="dropdown-item {% if request.endpoint == 'courses.index' %}active{% endif %}" 
-                               href="{{ url_for('courses.index') }}">All Courses</a>
+                               href="{{ url_for('courses.index') }}">
+                               <i class="fas fa-list me-2"></i>All Courses
+                            </a>
                         </li>
                         <li>
                             <a class="dropdown-item {% if request.endpoint == 'courses.categories' %}active{% endif %}" 
-                               href="{{ url_for('courses.categories') }}">Categories</a>
+                               href="{{ url_for('courses.categories') }}">
+                               <i class="fas fa-tags me-2"></i>Categories
+                            </a>
                         </li>
                         {% if current_user.is_authenticated %}
                         <li>
                             <a class="dropdown-item {% if request.endpoint == 'courses.create' %}active{% endif %}" 
-                               href="{{ url_for('courses.create') }}">Create Course</a>
+                               href="{{ url_for('courses.create') }}">
+                               <i class="fas fa-plus-circle me-2"></i>Create Course
+                            </a>
                         </li>
                         {% endif %}
                     </ul>
@@ -51,7 +147,9 @@
                 
                 <li class="nav-item">
                     <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}" 
-                       href="{{ url_for('main.contact') }}">Contact</a>
+                       href="{{ url_for('main.contact') }}">
+                       <i class="fas fa-envelope me-1"></i>Contact
+                    </a>
                 </li>
             </ul>
 
@@ -83,8 +181,8 @@
                         </ul>
                     </div>
                 {% else %}
-                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary me-2">Sign In</a>
-                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Sign Up</a>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-auth btn-signin me-2">Sign In</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-auth btn-signup">Sign Up</a>
                 {% endif %}
             </div>
         </div>

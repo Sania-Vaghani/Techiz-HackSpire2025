@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuest - User Dashboard</title>
+    
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/css/plugins.css">
+    <!-- Icon Plugins CSS -->
+    <link rel="stylesheet" href="assets/css/iconplugins.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- Theme Dark CSS -->
+    <link rel="stylesheet" href="assets/css/theme-dark.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logos/logo-2 (1).png">
+
+    <!-- Dashboard specific styles -->
+    <style>
+        /* Dashboard specific styles that complement the main theme */
+        .dashboard-container {
+            display: flex;
+            min-height: calc(100vh - 100px);
+            margin-top: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .dashboard-sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, var(--purple-color) 0%, var(--mint-color) 100%);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .dashboard-main {
+            flex: 1;
+            padding: 2rem;
+            background: #ffffff;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .dashboard-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: auto;
+        }
+
+        .profile-section img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+        }
+
+        .profile-info {
+            margin-left: 15px;
+        }
+
+        .profile-name {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .profile-status {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, var(--purple-color) 0%, var(--mint-color) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .stats-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--purple-color);
+        }
+
+        .stats-info p {
+            color: var(--gray-dark);
+            margin: 0;
+        }
+
+        .stats-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple-color) 0%, var(--mint-color) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pre Loader -->
+    <div id="preloader">
+        <div id="preloader-area">
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+        </div>
+        <div class="preloader-section preloader-left"></div>
+        <div class="preloader-section preloader-right"></div>
+    </div>
+    <!-- End Pre Loader -->
+
+    <!-- Start Navbar Area -->
+    <div class="navbar-area">
+        <div class="mobile-responsive-nav">
+    <div class="container">
+                <div class="mobile-responsive-menu">
+            <div class="logo">
+                        <a href="/">
+                            <img src="assets/images/logos/logo-2.png" class="logo-one" alt="logo">
+                            <img src="assets/images/logos/logo-2.png" class="logo-two" alt="logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu For Desktop Device -->
+        <div class="desktop-nav nav-area">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" href="/">
+                        <div class="logo-container">
+                            <svg class="logo-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Graduation Cap -->
+                                <path class="cap-top" d="M60,20 L20,40 L60,60 L100,40 L60,20" stroke="none"/>
+                                <path class="cap-bottom" d="M40,45 L40,70 C40,75 60,85 80,70 L80,45" stroke="none"/>
+                                <path class="cap-line" d="M95,42 L95,65" stroke-width="4" stroke-linecap="round"/>
+                                <!-- Book Pages -->
+                                <path class="book-pages" d="M30,50 C30,50 45,45 60,45 C75,45 90,50 90,50 L90,90 C90,90 75,85 60,85 C45,85 30,90 30,90 L30,50" stroke="none"/>
+                                <!-- Decorative Elements -->
+                                <circle class="circle-1" cx="60" cy="65" r="3"/>
+                                <circle class="circle-2" cx="70" cy="65" r="3"/>
+                                <circle class="circle-3" cx="50" cy="65" r="3"/>
+                            </svg>
+                            <div class="logo-text-container">
+                                <span class="logo-text">Edu<span class="highlight">Quest</span></span>
+                                <span class="logo-tagline">Explore • Learn • Grow</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link dropdown-toggle">Courses</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="courses.html" class="nav-link">Courses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="courses-list.html" class="nav-link">Courses List</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="courses-details.html" class="nav-link">Courses Details</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="contact.html" class="nav-link">Contact Us</a>
+                            </li>
+                        </ul>
+
+                        <div class="others-options d-flex align-items-center">
+                            <div class="optional-item">
+                                <a href="signin.html" class="default-btn border-radius-50">Sign In</a>
+                            </div>
+                            <div class="optional-item">
+                                <a href="signup.html" class="default-btn two border-radius-50">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- End Navbar Area -->
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="dashboard-sidebar">
+            <div class="nav-items">
+            <div class="nav-item active">
+                    <i class="ri-dashboard-line"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                    <i class="ri-book-open-line"></i>
+                    <span>My Courses</span>
+            </div>
+            <div class="nav-item">
+                    <i class="ri-calendar-line"></i>
+                    <span>Schedule</span>
+            </div>
+            <div class="nav-item">
+                    <i class="ri-file-list-line"></i>
+                    <span>Assignments</span>
+            </div>
+            <div class="nav-item">
+                    <i class="ri-medal-line"></i>
+                    <span>Grades</span>
+            </div>
+            <div class="nav-item">
+                    <i class="ri-settings-line"></i>
+                    <span>Settings</span>
+            </div>
+            </div>
+
+            <div class="profile-section">
+                <img src="assets/images/user-avatar.jpg" alt="User Avatar">
+                <div class="profile-info">
+                    <div class="profile-name">John Doe</div>
+                    <div class="profile-status">Student</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-main">
+            <div class="welcome-section">
+                <h2>Welcome back, John!</h2>
+                <p>Track your progress and continue learning</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="stats-card">
+                    <div class="stats-info">
+                        <h3>12</h3>
+                        <p>Enrolled Courses</p>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="ri-book-open-line"></i>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-info">
+                        <h3>85%</h3>
+                        <p>Average Score</p>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="ri-medal-line"></i>
+                    </div>
+                        </div>
+
+                <div class="stats-card">
+                    <div class="stats-info">
+                        <h3>24</h3>
+                        <p>Completed Lessons</p>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="ri-check-double-line"></i>
+                    </div>
+                </div>
+                    </div>
+
+            <div class="section-title">
+                <h2>Recent Courses</h2>
+                            </div>
+
+            <div class="courses-area pt-20 pb-70">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-courses-card">
+                                <div class="courses-img">
+                                    <a href="courses-details.html">
+                                        <img src="assets/images/courses/courses-1.jpg" alt="Image">
+                                    </a>
+                            </div>
+                                <div class="courses-content">
+                                    <div class="admin-profile">
+                                        <img src="assets/images/courses/admin-1.jpg" alt="Image">
+                                        <p>With <a href="courses-details.html">Jessica Hamson</a></p>
+                            </div>
+                                    <a href="courses-details.html">
+                                        <h3>Python Programming For Data Science</h3>
+                                    </a>
+                                    <div class="rating">
+                                        <i class="ri-star-fill"></i>4.9
+                                        <span>(25)</span>
+                            </div>
+                                    <div class="bottom-content">
+                                        <ul class="d-flex justify-content-between">
+                                            <li>
+                                                <ul>
+                                                    <li><i class="ri-book-open-line"></i> 12 Lessons</li>
+                                                    <li><i class="ri-time-line"></i> 20 hr 00 min</li>
+                                                </ul>
+                        </li>
+                                            <li><a href="#">Progress: 75%</a></li>
+                    </ul>
+                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-courses-card">
+                                <div class="courses-img">
+                                    <a href="courses-details.html">
+                                        <img src="assets/images/courses/courses-2.jpg" alt="Image">
+                                    </a>
+                                </div>
+                                <div class="courses-content">
+                                    <div class="admin-profile">
+                                        <img src="assets/images/courses/admin-2.jpg" alt="Image">
+                                        <p>With <a href="courses-details.html">David Warner</a></p>
+                                    </div>
+                                    <a href="courses-details.html">
+                                        <h3>Machine Learning Fundamentals</h3>
+                                    </a>
+                                    <div class="rating">
+                                        <i class="ri-star-fill"></i>4.8
+                                        <span>(20)</span>
+                            </div>
+                                    <div class="bottom-content">
+                                        <ul class="d-flex justify-content-between">
+                                            <li>
+                                                <ul>
+                                                    <li><i class="ri-book-open-line"></i> 14 Lessons</li>
+                                                    <li><i class="ri-time-line"></i> 25 hr 30 min</li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Progress: 60%</a></li>
+                                        </ul>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-courses-card">
+                                <div class="courses-img">
+                                    <a href="courses-details.html">
+                                        <img src="assets/images/courses/courses-3.jpg" alt="Image">
+                                    </a>
+                                </div>
+                                <div class="courses-content">
+                                    <div class="admin-profile">
+                                        <img src="assets/images/courses/admin-3.jpg" alt="Image">
+                                        <p>With <a href="courses-details.html">Sarah Taylor</a></p>
+                                    </div>
+                                    <a href="courses-details.html">
+                                        <h3>Web Development Bootcamp</h3>
+                                    </a>
+                                    <div class="rating">
+                                        <i class="ri-star-fill"></i>4.7
+                                        <span>(15)</span>
+                                    </div>
+                                    <div class="bottom-content">
+                                        <ul class="d-flex justify-content-between">
+                                            <li>
+                                                <ul>
+                                                    <li><i class="ri-book-open-line"></i> 16 Lessons</li>
+                                                    <li><i class="ri-time-line"></i> 30 hr 00 min</li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Progress: 45%</a></li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Footer Area -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="footer-top pt-100 pb-70">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="/">
+                                    <img src="assets/images/logos/logo-2.png" alt="Images">
+                                </a>
+                            </div>
+                            <p>
+                                Empowering minds through quality education. Join our community of learners and unlock your potential.
+                            </p>
+                            <ul class="social-link">
+                                <li>
+                                    <a href="https://www.facebook.com/" target="_blank">
+                                        <i class="ri-facebook-fill"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" target="_blank">
+                                        <i class="ri-twitter-fill"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" target="_blank">
+                                        <i class="ri-linkedin-fill"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" target="_blank">
+                                        <i class="ri-instagram-fill"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-widget">
+                            <h3>Useful Link</h3>
+                            <ul class="footer-list">
+                                <li>
+                                    <a href="courses.html">
+                                        All Courses
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="courses-details.html">
+                                        Course Details
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        Contact Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="user.html">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-widget">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-list">
+                                <li>
+                                    <a href="signin.html">
+                                        Sign In
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="signup.html">
+                                        Sign Up
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="courses.html">
+                                        Browse Courses
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        Support
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-widget">
+                            <h3>Contact Info</h3>
+                            <ul class="footer-contact">
+                                <li>
+                                    <i class="ri-map-pin-2-fill"></i>
+                                    <div class="content">
+                                        <h4>Location:</h4>
+                                        <span>2976 Sunrise Road, Las Vegas</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="ri-mail-fill"></i>
+                                    <div class="content">
+                                        <h4>Email:</h4>
+                                        <span><a href="mailto:hello@eduquest.com">hello@eduquest.com</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="ri-phone-fill"></i>
+                                    <div class="content">
+                                        <h4>Phone:</h4>
+                                        <span><a href="tel:+1-(514)-312-5678">+1 (514) 312-5678</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+            <div class="copy-right-area">
+                <div class="copy-right-text">
+                    <p>
+                        Copyright © 2024 EduQuest. All Rights Reserved
+                    </p>
+        </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer Area -->
+
+    <!-- Jquery Min JS -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- Bootstrap Bundle Min JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Meanmenu Min JS -->
+    <script src="assets/js/meanmenu.min.js"></script>
+    <!-- Owl Carousel Min JS -->
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- Wow Min JS -->
+    <script src="assets/js/wow.min.js"></script>
+    <!-- Appear Min JS -->
+    <script src="assets/js/appear.min.js"></script>
+    <!-- Odometer Min JS -->
+    <script src="assets/js/odometer.min.js"></script>
+    <!-- Jarallax Min JS -->
+    <script src="assets/js/jarallax.min.js"></script>
+    <!-- Bootstrap Datepicker Min JS -->
+    <script src="assets/js/bootstrap-datepicker.min.js"></script>
+    <!-- Magnific Popup Min JS -->
+    <script src="assets/js/magnific-popup.min.js"></script>
+    <!-- Form Validator Min JS -->
+    <script src="assets/js/form-validator.min.js"></script>
+    <!-- Contact JS -->
+    <script src="assets/js/contact-form-script.js"></script>
+    <!-- Ajaxchimp Min JS -->
+    <script src="assets/js/ajaxchimp.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>

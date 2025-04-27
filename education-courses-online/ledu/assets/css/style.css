@@ -42,18 +42,13 @@ Default CSS
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
   --bodyFonts: "Jost", sans-serif;
-  --mainColor: #00BFA5;  /* Fresh teal color */
-  --secondaryColor: #2196F3; /* Modern blue */
-  --gradientStart: #00BFA5; /* Gradient start - teal */
-  --gradientEnd: #2196F3;   /* Gradient end - blue */
-  --accentColor: #FF5252;   /* Bright accent for CTAs */
-  --titleColor: #1A237E;    /* Deep blue for titles */
-  --bodyColor: #424242;     /* Darker gray for better readability */
-  --lightBg: #F5F7FA;      /* Light background */
+  --mainColor: #08A9E6;
+  --redColor: #EC272F;
+  --titleColor: #21225F;
+  --bodyColor: #555555;
   --whiteColor: #ffffff;
-  --shadowColor: rgba(0, 0, 0, 0.1);
   --fontSize: 16px;
-  --transition: 0.3s;
+  --transition: 0.5s;
 }
 
 body {
@@ -215,14 +210,21 @@ img {
 }
 
 .default-btn {
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
+  padding: 15px 35px;
+  text-align: center;
   color: var(--whiteColor);
-  border-radius: 25px;
-  padding: 12px 30px;
-  font-weight: 500;
-  border: none;
+  font-size: var(--fontSize);
+  font-weight: 400;
   transition: var(--transition);
-  box-shadow: 0 4px 15px var(--shadowColor);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  background: var(--mainColor);
+  box-shadow: none;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .default-btn i {
   position: relative;
@@ -253,9 +255,7 @@ img {
   background-color: var(--mainColor);
 }
 .default-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px var(--shadowColor);
-  opacity: 0.95;
+  color: var(--whiteColor) !important;
 }
 .default-btn:hover:before {
   transition: transform 1s;
@@ -269,16 +269,14 @@ img {
 }
 .section-title span {
   color: var(--mainColor);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 7px;
 }
 .section-title h2 {
-  color: var(--titleColor);
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  font-size: 35px;
+  margin-top: 0;
+  line-height: 1.2;
+  margin-bottom: 0;
 }
 .section-title h2 b {
   color: var(--mainColor);
@@ -439,8 +437,6 @@ Top Header CSS
 Navbar Area
 ===================================*/
 .desktop-nav {
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
-  box-shadow: 0 2px 15px var(--shadowColor);
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -486,15 +482,20 @@ Navbar Area
   display: none;
 }
 .desktop-nav .navbar .navbar-nav .nav-item a {
-  color: var(--whiteColor);
+  font-size: 17px;
+  color: var(--titleColor);
+  position: relative;
+  z-index: 1;
   font-weight: 500;
-  padding: 25px 18px;
-  transition: var(--transition);
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: 15px;
+  margin-right: 15px;
 }
-.desktop-nav .navbar .navbar-nav .nav-item a:hover {
-  color: var(--whiteColor);
-  opacity: 0.9;
-  transform: translateY(-2px);
+.desktop-nav .navbar .navbar-nav .nav-item a:hover, .desktop-nav .navbar .navbar-nav .nav-item a:focus, .desktop-nav .navbar .navbar-nav .nav-item a.active {
+  color: var(--mainColor);
 }
 .desktop-nav .navbar .navbar-nav .nav-item:last-child a {
   margin-right: 0;
@@ -503,7 +504,7 @@ Navbar Area
   margin-left: 0;
 }
 .desktop-nav .navbar .navbar-nav .nav-item:hover a, .desktop-nav .navbar .navbar-nav .nav-item:focus a, .desktop-nav .navbar .navbar-nav .nav-item.active a {
-  color: var(--whiteColor);
+  color: var(--mainColor);
 }
 .desktop-nav .navbar .navbar-nav .nav-item .dropdown-menu {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
@@ -979,10 +980,14 @@ Navbar Area
 Main Banner Area
 ===================================*/
 .banner-area {
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
-  padding: 120px 0;
+  background-color: #F5F5F5;
+  z-index: 1;
   position: relative;
-  overflow: hidden;
+}
+
+.banner-area-ptb {
+  padding-top: 140px;
+  padding-bottom: 190px;
 }
 
 .banner-content span {
@@ -992,15 +997,14 @@ Main Banner Area
   margin-bottom: 15px;
 }
 .banner-content h1 {
-  color: var(--whiteColor);
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+  font-size: 60px;
+  color: var(--titleColor);
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 .banner-content p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
+  max-width: 700px;
 }
 .banner-content .banner-form-area {
   margin-bottom: 30px;
@@ -2234,15 +2238,9 @@ Courses Area
 
 .courses-item {
   margin-bottom: 30px;
-  background: var(--whiteColor);
-  border-radius: 12px;
-  box-shadow: 0 5px 20px var(--shadowColor);
-  transition: var(--transition);
-  overflow: hidden;
-}
-.courses-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px var(--shadowColor);
+  background-color: var(--whiteColor);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 0 15px;
+  transition: 0.7s;
 }
 .courses-item a {
   display: block;
@@ -5511,8 +5509,7 @@ Footer Area
 }
 
 .footer-area {
-  background: var(--lightBg);
-  padding: 80px 0 0;
+  background-color: var(--titleColor);
 }
 
 .footer-widget {
@@ -5522,20 +5519,35 @@ Footer Area
   margin-bottom: 20px;
 }
 .footer-widget h3 {
-  color: var(--titleColor);
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: var(--whiteColor);
+  display: block;
   position: relative;
+  z-index: 1;
+  padding-bottom: 10px;
 }
 .footer-widget h3::before {
-  content: '';
+  content: "";
   position: absolute;
-  bottom: -10px;
+  z-index: -1;
+  bottom: 0;
   left: 0;
-  width: 50px;
+  width: 70px;
   height: 3px;
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
-  border-radius: 3px;
+  background-color: var(--whiteColor);
+  opacity: 0.2;
+}
+.footer-widget h3::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  width: 35px;
+  height: 3px;
+  background-color: var(--mainColor);
 }
 .footer-widget p {
   margin-bottom: 25px;
@@ -5559,20 +5571,22 @@ Footer Area
 }
 .footer-widget .social-link li a {
   display: inline-block;
-  background: var(--whiteColor);
-  color: var(--titleColor);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  transition: var(--transition);
-  box-shadow: 0 3px 10px var(--shadowColor);
 }
-.footer-widget .social-link li a:hover {
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
+.footer-widget .social-link li a i {
+  font-size: 15px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 50px;
+  color: var(--mainColor);
+  background-color: var(--whiteColor);
+  transition: var(--transition);
+  display: inline-block;
+}
+.footer-widget .social-link li a:hover i {
   color: var(--whiteColor);
-  transform: translateY(-3px);
+  background-color: var(--mainColor);
 }
 .footer-widget .footer-list {
   list-style: none;

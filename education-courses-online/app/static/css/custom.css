@@ -1,6 +1,6 @@
 /* General styles */
 :root {
-    --primary-color: #2563eb;
+    --primary-color: #0984e3;
     --secondary-color: #1e40af;
     --background-color: #ffffff;
     --text-color: #1f2937;
@@ -25,7 +25,7 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin: 0;
+    margin: 0;  
 }
 
 .nav-link {

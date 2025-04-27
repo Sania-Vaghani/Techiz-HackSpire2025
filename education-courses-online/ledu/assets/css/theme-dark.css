@@ -11,7 +11,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: transparent;
+  background-color: #222222;
   border: 1.5px solid var(--mainColor);
   transition: 0.4s;
 }
@@ -31,12 +31,6 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.switch-box .slider.round {
-  border-radius: 34px;
-}
-.switch-box .slider.round::before {
-  border-radius: 50%;
-}
 .switch-box .switch {
   position: relative;
   display: inline-block;
@@ -49,11 +43,10 @@
   height: 0;
 }
 .switch-box input:checked + .slider {
-  background-color: transparent;
-  border: 1.5px solid var(--redColor);
+  background-color: var(--mainColor);
 }
 .switch-box input:focus + .slider {
-  box-shadow: 0 0 1px var(--redColor);
+  box-shadow: 0 0 1px var(--mainColor);
 }
 .switch-box input:checked + .slider:before {
   transform: translateX(24px);
